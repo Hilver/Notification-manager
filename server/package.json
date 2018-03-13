@@ -22,7 +22,7 @@
     "morgan": "^1.9.0",
     "morgana": "^1.0.4",
     "nodemon": "^1.17.1",
-    "sequelize": "^4.35.2",
+    "sequelize": "^4.36.0",
     "sqlite3": "^3.1.8"
   }
 }
