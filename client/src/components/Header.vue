@@ -4,8 +4,8 @@
     <v-toolbar-title>NotifyManago</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn flat v-on:click="goTo('login')">Login</v-btn>
-      <v-btn flat v-on:click="goTo('register')">Sign Up</v-btn>
+      <v-btn v-if="!$store.state.isUserLoggedIn" flat v-on:click="goTo('login')">Login</v-btn>
+      <v-btn v-if="!$store.state.isUserLoggedIn" flat v-on:click="goTo('register')">Sign Up</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
