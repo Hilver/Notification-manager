@@ -16,6 +16,17 @@ module.exports = {
            })
        }
     },
+    async show (req, res) {
+        try{
+         const notification = await Notifications.findById(req.params.notificationId)
+         res.send(notification)
+        } 
+        catch (err) {
+            res.status(400).send({
+                error: 'An error has occured trying to show notification.'
+            })
+        }
+     },
     async post (req, res) {
         try{
          const notifications = await Notifications.create(req.body)
@@ -24,6 +35,21 @@ module.exports = {
         catch (err) {
             res.status(400).send({
                 error: 'An error has occured trying to create notification.'
+            })
+        }
+     },
+     async put (req, res) {
+        try{
+         const notification = await Notifications.update(req.body, {
+             where: {
+                 id: req.params.notificationId
+             }
+         })
+         res.send(req.body)
+        } 
+        catch (err) {
+            res.status(400).send({
+                error: 'An error has occured trying to update the notification.'
             })
         }
      }

@@ -25,6 +25,9 @@
                <v-btn color="primary" disabled>Done
                   <v-icon dark right>check_circle</v-icon>
                </v-btn>
+               <v-btn color="info" v-on:click="goTo('edit-notification/' + notification.id)">
+                  <v-icon dark left>edit</v-icon>Edit
+               </v-btn>
                <v-btn color="red" dark>
                   <v-icon dark left>remove_circle</v-icon>Cancel
                </v-btn>

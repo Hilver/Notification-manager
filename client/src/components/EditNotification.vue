@@ -31,7 +31,7 @@
 <v-layout row wrap justify-center class="pt-5">
   <v-flex lg3>
     <div v-if="error" class="danger-alert">{{ error }}</div>
-  <v-btn large block color="primary" v-on:click="create">Add Notification
+  <v-btn large block color="primary" v-on:click="save">Save Notification
   </v-btn>  
   </v-flex>
 </v-layout>
@@ -43,28 +43,30 @@ import NotificationService from '../services/NotificationService'
 
 export default {
   data () {
-    return {
-      notification: {
-      title: '',
-      message: '',
-      timeDay: null,
-      timeHour: null
-      },
+    return {      
+      notification: {},
       rules: {
         required: (value) => !!value || "Required."
       },
       error: null
     }
   },
+  async mounted() {
+      const notificationId = this.$store.state.route.params.notificationId
+      this.notification = (await NotificationService.show(notificationId)).data
+
+  },
   methods: {
-    async create () {
+    async save () {
+        this.error = null
       const areAllFieldsFilledIn = Object.keys(this.notification).every(key => !!this.notification[key])
       if(!areAllFieldsFilledIn) {
         this.error = 'Please fill in all the required fields and set time of send.'
         return
       }
+      const notificationId = this.$store.state.route.params.notificationId
       try{        
-      const postNotify = await NotificationService.post(this.notification)
+      await NotificationService.put(this.notification)
       this.$router.push("/notifications")
       } catch(err){
         console.log("cannot post notification", err)
